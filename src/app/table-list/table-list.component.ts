@@ -23,7 +23,7 @@ export interface StudentData {
   styleUrls: ['./table-list.component.css']
 })
 export class TableListComponent implements OnInit {
-  displayedColumns: string[] = ['enrollment', 'firstName', 'lastName', 'year', 'email', 'departmant', 'branch', 'gender', 'dateOfAdmission', 'course', 'phoneNumber'];
+  displayedColumns: string[] = ['enrollment', 'firstName', 'lastName', 'year', 'email', 'department', 'branch', 'gender', 'dateOfAdmission', 'course', 'phoneNumber'];
   dataSource: MatTableDataSource<any> = undefined;
 
   students: any[] = [];
