@@ -70,11 +70,33 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   getNewAdmission() {
-    return this.studentData;
+    return this.http.get(`${this.URL}/adm/v2/admin/studentInfo/allStudent`);
   }
 
-  addStudentInfo(formaData: any){
+  addStudentInfo(formaData: any) {
     return this.http.post(`${this.URL}/adm/v2/studentInfo/addstudent`, formaData);
+  }
+
+
+  addTeacherInfo(formData: any){
+    return this.http.post(`${this.URL}/adm/v3/admin/teacherInfo/addTeacher`, formData);
+  }
+
+  getAllTeachers(){
+    return this.http.get(`${this.URL}/adm/v2/admin/`);
+  }
+
+  getTotalDepartments(){
+    return this.http.get(`${this.URL}/`)
+  }
+
+  getTotalCourses(){
+    return this.http.get(`${this.URL}/`)
+  }
+
+
+  getStudentProfile(enrollment: string){
+    return this.http.get(`${this.URL}/student/${enrollment}`);
   }
 
 }

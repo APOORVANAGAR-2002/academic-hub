@@ -8,6 +8,8 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { MatTableModule } from '@angular/material/table';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   imports: [
@@ -18,12 +20,13 @@ import { MatTableModule } from '@angular/material/table';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    MatTableModule
+    MatTableModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-
+    LoginComponent,
+    SignupComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

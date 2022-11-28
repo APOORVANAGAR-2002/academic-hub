@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { UserProfileComponent } from '../../user-profile/user-profile.component';
+import { UserProfileComponent } from '../../student/student.component';
 import { TableListComponent } from '../../table-list/table-list.component';
-import { TypographyComponent } from '../../typography/typography.component';
+import { TypographyComponent } from '../../profile/profile.component';
 import { IconsComponent } from '../../icons/icons.component';
-import { MapsComponent } from '../../maps/maps.component';
-import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { TeacherListComponent } from 'app/teacher-list/teacher-list.component';
+import { TeacherComponent } from 'app/teacher/teacher.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -52,12 +52,19 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'student/edit-student', component: UserProfileComponent },
+    { path: 'student/addStudent', component: UserProfileComponent },
+    { path: 'student/editStudent/:id', component: UserProfileComponent },
+    { path: 'student/allStudents', component: TableListComponent },
+    { path: 'student/allStudents/:id', component: TypographyComponent },
+    { path: 'teacher/addTeacher', component: TeacherComponent },
+    { path: 'teacher/editTeacher', component: TeacherComponent },
+    { path: 'teacher/allTeachers', component: TeacherListComponent },
     { path: 'table-list', component: TableListComponent },
     { path: 'typography', component: TypographyComponent },
-    { path: 'icons', component: IconsComponent },
-    { path: 'maps', component: MapsComponent },
-    { path: 'notifications', component: NotificationsComponent },
-    { path: 'upgrade', component: UpgradeComponent },
+    // { path: 'icons', component: IconsComponent },
+    // { path: 'maps', component: MapsComponent },
+    // { path: 'notifications', component: NotificationsComponent },
+    // { path: 'upgrade', component: UpgradeComponent },
 ];

@@ -1,15 +1,15 @@
 <div class="logo">
     <a href="https://www.creative-tim.com" class="simple-text">
         <div class="logo-img">
-            <img src="https://www.brooklinspringfair.com/wp-content/uploads/2017/03/your-logo-here-318x300.png"/>
+            <img src="https://www.brooklinspringfair.com/wp-content/uploads/2017/03/your-logo-here-318x300.png" />
         </div>
         ORG NAME
     </a>
     <h4 style="text-align: center;">Admin name</h4>
 </div>
 <div class="sidebar-wrapper">
-    
-  <!-- <div *ngIf="isMobileMenu()">
+
+    <!-- <div *ngIf="isMobileMenu()">
     <form class="navbar-form">
       <span class="bmd-form-group">
         <div class="input-group no-border">
@@ -42,7 +42,7 @@
   </div> -->
     <ul class="nav">
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-            <a class="nav-link" [routerLink]="[menuItem.path]">
+            <a class="nav-link" [routerLink]="[menuItem.route]">
                 <i class="material-icons">{{menuItem.icon}}</i>
                 <p>{{menuItem.title}}</p>
             </a>

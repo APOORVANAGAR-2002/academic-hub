@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { UserProfileComponent } from '../../user-profile/user-profile.component';
+import { UserProfileComponent } from '../../student/student.component';
 import { TableListComponent } from '../../table-list/table-list.component';
-import { TypographyComponent } from '../../typography/typography.component';
+import { TypographyComponent } from '../../profile/profile.component';
 import { IconsComponent } from '../../icons/icons.component';
-import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +21,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { TeacherComponent } from 'app/teacher/teacher.component';
+import { TeacherListComponent } from 'app/teacher-list/teacher-list.component';
+import { StudentEditComponent } from 'app/student-edit/student-edit.component';
+import { TeacherEditComponent } from 'app/teacher-edit/teacher-edit.component';
 
 @NgModule({
   imports: [
@@ -39,7 +42,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDatepickerModule,
     MatChipsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   declarations: [
     DashboardComponent,
@@ -47,9 +50,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     TableListComponent,
     TypographyComponent,
     IconsComponent,
-    MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+    TeacherComponent,
+    TeacherListComponent,
+    StudentEditComponent,
+    TeacherEditComponent
   ]
 })
 

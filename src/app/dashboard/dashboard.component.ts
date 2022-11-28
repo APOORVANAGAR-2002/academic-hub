@@ -10,6 +10,11 @@ import * as Chartist from 'chartist';
 export class DashboardComponent implements OnInit {
 
   studentList: any[];
+  totalStudents: number;
+  totalTeacher: number;
+  totalDepartments: number;
+  totalCourses: number;
+
   constructor(private dashboardService: DashboardService) { }
   data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -82,7 +87,11 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
 
     this.getNewAddmission();
-    
+    this.getStudentCount();
+    this.getTeachersCount();
+    this.getDepartmentsCount();
+    this.getCoursesCount();
+
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
     const dataDailySalesChart: any = {
       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -159,9 +168,40 @@ export class DashboardComponent implements OnInit {
     this.startAnimationForBarChart(websiteViewsChart);
   }
 
-  getNewAddmission(){
-    this.studentList = this.dashboardService.getNewAdmission().slice(0,10);
+  getNewAddmission() {
+    this.dashboardService.getNewAdmission().subscribe((res) => {
+      this.studentList = JSON.parse(JSON.stringify(res));
+    })
   }
+  getStudentCount(){
+    this.dashboardService.getNewAdmission().subscribe((res)=>{
+      var students = JSON.parse(JSON.stringify(res));
+      this.totalStudents = students.length;
+      console.log(this.totalStudents);
+    })
+  }
+  getTeachersCount(){
+    this.dashboardService.getAllTeachers().subscribe((res)=>{
+      var teachers = JSON.parse(JSON.stringify(res));
+      this.totalTeacher = teachers.length;
+      console.log(this.totalTeacher);
+    })
+  }
+  getDepartmentsCount(){
+    this.dashboardService.getTotalDepartments().subscribe((res)=>{
+      var department = JSON.parse(JSON.stringify(res));
+      this.totalDepartments = department.length;
+      console.log(this.totalDepartments);
+    })
+  }
+  getCoursesCount(){
+    this.dashboardService.getTotalCourses().subscribe((res)=>{
+      var course = JSON.parse(JSON.stringify(res));
+      this.totalCourses = course.length;
+      console.log(this.totalCourses);
+    })
+  }
+
 
 
 }

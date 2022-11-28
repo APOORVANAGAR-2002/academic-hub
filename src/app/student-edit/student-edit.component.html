@@ -1,0 +1,169 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Edit Profile</h4>
+              <p class="card-category">Complete your profile</p>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="userForm">
+                <div class="row">
+                  <div class="col-md-4">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="First name" formControlName="firstName">
+                      <mat-error *ngIf="createFormControl.firstName.hasError('required')">
+                        First-name is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Last name" formControlName="lastName">
+                      <mat-error *ngIf="createFormControl.lastName.hasError('required')">
+                        Last-name is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Email" type="email" formControlName="email">
+                      <mat-error
+                        *ngIf="createFormControl.email.hasError('email') && !createFormControl.email.hasError('required')">
+                        Please enter a valid email address
+                      </mat-error>
+                      <mat-error *ngIf="createFormControl.email.hasError('required')">
+                        Email is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Enrollment no." type="text" formControlName="enrollment">
+                      <mat-error *ngIf="createFormControl.enrollment.hasError('required')">
+                        Enrollment is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Current year" type="number" formControlName="year">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Phone no." type="tel" formControlName="phoneNumber">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Gender" type="tel" formControlName="gender">
+                    </mat-form-field>
+                    <!-- <mat-form-field class="example-full-width">
+                      <mat-label>Gender</mat-label>
+                      <select>
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Transgender">Transgender</option>
+                        <option value="Non-binary/non-conforming">Non-binary/non-conforming</option>
+                        <option value="Prefer not to respond">Prefer not to respond</option>
+                      </select>
+                    </mat-form-field> -->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Department" type="text" formControlName="department">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Branch" type="text" formControlName="branch">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Course" type="text" formControlName="course">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Date of Admission" type="date" formControlName="dateOfAdmission">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- password, skills, project: projectName, projectDescription -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-form-field class="example-chip-list">
+                      <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let skill of Skills" [selectable]="selectable" [removable]="removable"
+                          (removed)="remove(skill)">
+                          {{skill}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Add skills..." [matChipInputFor]="chipList"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="add($event)" [formControl]="Skills">
+                      </mat-chip-list>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row" formArrayName="projects">
+                  <div class="col-md-12" *ngFor="let child of userForm.get('projects')['controls']; let i = index"
+                    formGroupName="{{i}}">
+                    <div class="row pt-2" style="display: flex; align-items: center;">
+                      <div class="col-md-3">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="ProjectName" type="text" formControlName="projectName">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-7">
+                        <mat-form-field class="example-full-width">
+                          <textarea matInput placeholder="Project Description here..." type="text"
+                            formControlName="projectDescription"></textarea>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-2">
+                        <a (click)="removeProject(i)"><span class="btn btn-sm btn-danger"><i class="fa fa-times"
+                              aria-hidden="true"></i></span></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 pt-2">
+                    <a class="btn btn-sm btn-success" (click)="addProject()">+Add</a>
+                  </div>
+                </div>
+  
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="submitForm()">Update
+                  Profile</button>
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:void(0)">
+                            <img class="img" src="./assets/img/faces/marc.jpg" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                        <h4 class="card-title">Alec Thompson</h4>
+                        <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a>
+                    </div>
+                </div>
+            </div> -->
+      </div>
+    </div>
+  </div>

@@ -1,32 +1,28 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DashboardService } from 'app/services/dashboard.service';
 
-export interface StudentData {
-  enrollment: string;
+export interface TeacherData {
   firstName: string;
   lastName: string;
-  year: number;
   email: string;
   department: string;
-  branch: string;
-  gender: string;
-  dateOfAdmission: string;
-  course: string;
-  phoneNumber: string;
+  subject: string;
 }
+
 @Component({
-  selector: 'app-table-list',
-  templateUrl: './table-list.component.html',
-  styleUrls: ['./table-list.component.css']
+  selector: 'app-teacher-list',
+  templateUrl: './teacher-list.component.html',
+  styleUrls: ['./teacher-list.component.css']
 })
-export class TableListComponent implements OnInit {
-  displayedColumns: string[] = ['enrollment', 'firstName', 'lastName', 'year', 'email', 'department', 'branch', 'gender', 'dateOfAdmission', 'course', 'phoneNumber'];
+export class TeacherListComponent {
+
+  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'department', 'subject'];
   dataSource: MatTableDataSource<any> = undefined;
 
-  students: any[];
+  teachers: any[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -34,11 +30,13 @@ export class TableListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dashboardService.getNewAdmission().subscribe((res) => {
-      var students = JSON.parse(JSON.stringify(res));
-      this.dataSource = new MatTableDataSource(students);
-      console.log(students);
-    })
+    this.dashboardService.getNewAdmission().subscribe((res)=>{
+      console.log("response teacher list", res);
+      this.teachers = JSON.parse(JSON.stringify(res));
+    });
+    console.log(this.teachers);
+    this.dataSource = new MatTableDataSource(this.teachers);
+
   }
 
   ngAfterViewInit() {
@@ -54,5 +52,7 @@ export class TableListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-}
 
+
+
+}

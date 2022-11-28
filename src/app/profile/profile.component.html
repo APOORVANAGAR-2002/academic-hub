@@ -15,14 +15,16 @@
                                 </a>
                             </div>
                             <div class="card-body">
-                                <h6 class="card-category text-gray">Department</h6>
-                                <h4 class="card-title">Student Name</h4>
+                                <h6 class="card-category text-gray">{{studentInfo.department}}</h6>
+                                <h4 class="card-title">{{studentInfo.firstName}} {{studentInfo.lastName}}</h4>
                                 <p class="card-description">
                                     <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
-                                    +91 983994848
+                                    +91 {{studentInfo.phoneNumber}}
                                 </p>
                                 <a href="javascript:void(0)" class="btn btn-danger btn-round"><i
                                         class="fa fa-download"></i></a>
+                                <a [routerLink]="['/student/editStudent',params]" class="btn btn-danger btn-round"><i
+                                        class="fa fa-edit"></i></a>
                             </div>
                         </div>
                     </div>
@@ -35,15 +37,15 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <h4>Full Name</h4>
-                                        <h5>First Last</h5>
+                                        <h5>{{studentInfo.firstName}} {{studentInfo.lastName}}</h5>
                                     </div>
                                     <div class="col-md-3">
                                         <h4>Mobile</h4>
-                                        <h5>(+91) 934589348</h5>
+                                        <h5>(+91) {{studentInfo.phoneNumber}}</h5>
                                     </div>
                                     <div class="col-md-3">
                                         <h4>Email</h4>
-                                        <h5>name@gmail.com</h5>
+                                        <h5>{{studentInfo.email}}</h5>
                                     </div>
                                     <div class="col-md-3">
                                         <h4>Location</h4>
@@ -52,11 +54,11 @@
                                     <br>
                                     <div class="col-sm-6" style="text-align: left;">
                                         <h6><b>Gender</b></h6>
-                                        <p>Female</p>
+                                        <h6><b>Course</b></h6>
                                     </div>
                                     <div class="col-sm-6" style="text-align: right;">
-                                        <h6><b>Department</b></h6>
-                                        <p>Computer Science</p>
+                                        <p>{{studentInfo.gender}}</p>
+                                        <p>{{studentInfo.course}}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -65,7 +67,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <mat-chip-list aria-label="Dog selection">
-                                            <ng-container *ngFor="let skill of skills">
+                                            <ng-container *ngFor="let skill of studentInfo.skills">
                                                 <mat-chip color="info">
                                                     {{skill}}
                                                 </mat-chip>
@@ -78,9 +80,9 @@
                                         <h4><b>Projects</b></h4>
                                     </div>
                                     <div class="col-md-12">
-                                        <ng-container *ngFor="let project of projects; let i">
+                                        <ng-container *ngFor="let project of studentInfo.projects; let i=index">
                                             <div class="card">
-                                                <div class="card-header">#{{i}}</div>
+                                                <div class="card-header"># {{i+1}}</div>
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{project.projectName}}</h5>
                                                     <p class="card-text">{{project.projectDesciption}}</p>

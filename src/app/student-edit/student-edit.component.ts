@@ -1,27 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { ActivatedRoute } from '@angular/router';
 import { DashboardService } from 'app/services/dashboard.service';
 
-export interface Skills {
-  name: string;
-}
-
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  selector: 'app-student-edit',
+  templateUrl: './student-edit.component.html',
+  styleUrls: ['./student-edit.component.css']
 })
-export class UserProfileComponent implements OnInit {
-
+export class StudentEditComponent {
   userForm: FormGroup;
-  emptyControl = new FormControl(null, Validators.required);
-  selectFormControl = new FormControl('', Validators.required);
-
-
-  gender: any[] = ['Male', 'Female', 'Binary', 'Do not wish to disclose'];
-
   visible = true;
   selectable = true;
   removable = true;
@@ -29,7 +19,7 @@ export class UserProfileComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   Skills: string[] = [];
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.createForm();
   }
 
@@ -109,7 +99,28 @@ export class UserProfileComponent implements OnInit {
     return <FormArray>this.userForm.get('skills');
   }
 
+  params: string;
+  studentInfo: any;
+
   ngOnInit() {
+    this.params = this.route.snapshot.paramMap.get('id');
+    console.log(this.params);
+    this.getStudentInfo();
+
   }
+
+  getStudentInfo() {
+    this.dashboardService.getStudentProfile(this.params).subscribe((res) => {
+      this.studentInfo = JSON.parse(JSON.stringify(res));
+      console.log(this.studentInfo);
+
+      if (this.studentInfo) {
+        this.userForm.get('firstName').setValue(this.studentInfo.firstName);
+        console.log(this.userForm);
+
+      }
+    })
+  }
+
 
 }
