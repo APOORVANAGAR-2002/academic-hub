@@ -22,10 +22,10 @@ export class LoginComponent {
   submitForm() {
     const value = this.userForm.value;
     console.log(value);
+    alert('Logged in successfully');
+    this.router.navigate(['dashboard/mody@gmail.com']);
     this.dashboardService.login(value).subscribe((res) => {
       console.log("Login:", res);
-      alert('Logged in successfully');
-      this.router.navigate(['dashboard/mody@gmail.com']);
     })
   }
 
