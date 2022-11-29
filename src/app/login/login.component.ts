@@ -15,8 +15,8 @@ export class LoginComponent {
   }
   createForm() {
     this.userForm = new FormGroup({
-      email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", Validators.required),
+      email: new FormControl(""),
+      password: new FormControl(""),
     });
   }
   submitForm() {
@@ -25,7 +25,7 @@ export class LoginComponent {
     this.dashboardService.login(value).subscribe((res) => {
       console.log("Login:", res);
       alert('Logged in successfully');
-      this.router.navigate(['dashboard', value.email]);
+      this.router.navigate(['dashboard/mody@gmail.com']);
     })
   }
 
