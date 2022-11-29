@@ -23,7 +23,7 @@ export class LoginComponent {
     const value = this.userForm.value;
     console.log(value);
     alert('Logged in successfully');
-    this.router.navigate(['dashboard/mody@gmail.com']);
+    this.router.navigate(['/dashboard/mody@gmail.com']);
     this.dashboardService.login(value).subscribe((res) => {
       console.log("Login:", res);
     })

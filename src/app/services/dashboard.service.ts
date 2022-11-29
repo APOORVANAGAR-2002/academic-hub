@@ -67,6 +67,7 @@ export class DashboardService {
   ]
 
   URL: string = 'https://academic-hub-backend.herokuapp.com';
+  email: string = 'mody@gmail.com';
   constructor(private http: HttpClient) { }
 
   getNewAdmission() {
@@ -86,11 +87,11 @@ export class DashboardService {
   }
 
   getTotalDepartments(email: string) {
-    return this.http.get(`${this.URL}/admin/totalDepartments/${email}`)
+    return this.http.get(`${this.URL}/admin/totalDepartments/${this.email}`)
   }
 
   getTotalCourses(email: string) {
-    return this.http.get(`${this.URL}/admin/totalCourses/${email}`)
+    return this.http.get(`${this.URL}/admin/totalCourses/${this.email}`)
   }
 
   getStudentProfile(enrollment: string) {
@@ -104,7 +105,7 @@ export class DashboardService {
     });
   }
 
-  login(formData: any){
+  login(formData: any) {
     return this.http.post(`${this.URL}/login`, formData);
   }
 

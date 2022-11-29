@@ -10,11 +10,12 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'signin',
+    redirectTo: 'dashboard/mody@gmail.com',
     pathMatch: 'full',
   },
-  { path: 'signin', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'signin', component: LoginComponent },
+
   {
     path: '',
     component: AdminLayoutComponent,
