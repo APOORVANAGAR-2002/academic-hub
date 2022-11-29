@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -74,29 +74,38 @@ export class DashboardService {
   }
 
   addStudentInfo(formaData: any) {
-    return this.http.post(`${this.URL}/adm/v2/studentInfo/addstudent`, formaData);
+    return this.http.post(`${this.URL}/adm/v2/admin/studentinfo/addstudent`, formaData);
   }
 
-
-  addTeacherInfo(formData: any){
+  addTeacherInfo(formData: any) {
     return this.http.post(`${this.URL}/adm/v3/admin/teacherInfo/addTeacher`, formData);
   }
 
-  getAllTeachers(){
-    return this.http.get(`${this.URL}/adm/v2/admin/`);
+  getAllTeachers() {
+    return this.http.get(`${this.URL}/adm/v3/admin/teacherInfo/allTeacher`);
   }
 
-  getTotalDepartments(){
-    return this.http.get(`${this.URL}/`)
+  getTotalDepartments(email: string) {
+    return this.http.get(`${this.URL}/admin/totalDepartments/${email}`)
   }
 
-  getTotalCourses(){
-    return this.http.get(`${this.URL}/`)
+  getTotalCourses(email: string) {
+    return this.http.get(`${this.URL}/admin/totalCourses/${email}`)
   }
 
-
-  getStudentProfile(enrollment: string){
+  getStudentProfile(enrollment: string) {
     return this.http.get(`${this.URL}/student/${enrollment}`);
+  }
+
+  getProfilePdf(enrollment: string) {
+    return this.http.post(`${this.URL}/student/generatePdf/${enrollment}`, null, {
+      responseType: 'blob',
+      headers: new HttpHeaders().append("Content-Type", "application/json")
+    });
+  }
+
+  login(formData: any){
+    return this.http.post(`${this.URL}/login`, formData);
   }
 
 }

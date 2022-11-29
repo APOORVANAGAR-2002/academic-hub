@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { DashboardService } from 'app/services/dashboard.service';
 
 @Component({
   selector: 'app-login',
@@ -6,5 +9,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  userForm: FormGroup;
+  constructor(private dashboardService: DashboardService, private router: Router) {
+    this.createForm();
+  }
+  createForm() {
+    this.userForm = new FormGroup({
+      email: new FormControl("", [Validators.required, Validators.email]),
+      password: new FormControl("", Validators.required),
+    });
+  }
+  submitForm() {
+    const value = this.userForm.value;
+    console.log(value);
+    this.dashboardService.login(value).subscribe((res) => {
+      console.log("Login:", res);
+      alert('Logged in successfully');
+      this.router.navigate(['dashboard', value.email]);
+    })
+  }
 
 }

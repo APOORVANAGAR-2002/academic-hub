@@ -10,26 +10,23 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   { title: 'dashboard', icon: 'dashboard', route: 'dashboard' },
   {
-    title: 'all-students', icon: 'user', route: 'student/allStudents'
+    title: 'all-students', icon: 'group', route: 'student/allStudents'
   },
   {
-    title: 'add-student', icon: 'user', route: 'student/addStudent'
+    title: 'add-student', icon: 'person_add', route: 'student/addStudent'
+  },
+  // {
+  //   title: 'edit-student', icon: 'user', route: 'student/editStudent'
+  // },
+  {
+    title: 'all-teachers', icon: 'group', route: 'teacher/allTeachers'
   },
   {
-    title: 'edit-student', icon: 'user', route: 'student/editStudent'
+    title: 'add-teacher', icon: 'person_add', route: 'teacher/addTeacher'
   },
-  {
-    title: 'view-student', icon: 'user', route: 'student/viewStudent'
-  },
-  {
-    title: 'all-teachers', icon: 'user', route: 'teacher/allTeachers'
-  },
-  {
-    title: 'add-teacher', icon: 'user', route: 'teacher/addTeacher'
-  },
-  {
-    title: 'edit-teacher', icon: 'user', route: 'teacher/editTeacher'
-  },
+  // {
+  //   title: 'edit-teacher', icon: 'user', route: 'teacher/editTeacher'
+  // },
 
   // { path: 'dashboard', title: 'Dashboard', icon: 'dashboard' },
   // {

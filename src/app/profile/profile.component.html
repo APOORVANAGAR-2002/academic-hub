@@ -21,7 +21,7 @@
                                     <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
                                     +91 {{studentInfo.phoneNumber}}
                                 </p>
-                                <a href="javascript:void(0)" class="btn btn-danger btn-round"><i
+                                <a (click)="downloadPdf()" class="btn btn-danger btn-round"><i
                                         class="fa fa-download"></i></a>
                                 <a [routerLink]="['/student/editStudent',params]" class="btn btn-danger btn-round"><i
                                         class="fa fa-edit"></i></a>
@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <mat-chip-list aria-label="Dog selection">
-                                            <ng-container *ngFor="let skill of studentInfo.skills">
+                                            <ng-container *ngFor="let skill of studentInfo.skills.split(',')">
                                                 <mat-chip color="info">
                                                     {{skill}}
                                                 </mat-chip>

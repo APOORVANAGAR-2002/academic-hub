@@ -36,14 +36,14 @@ export class TableListComponent implements OnInit {
   ngOnInit() {
     this.dashboardService.getNewAdmission().subscribe((res) => {
       var students = JSON.parse(JSON.stringify(res));
-      this.dataSource = new MatTableDataSource(students);
+      this.dataSource = new MatTableDataSource(JSON.parse(JSON.stringify(res)));
       console.log(students);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {

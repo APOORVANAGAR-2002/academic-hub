@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DashboardService } from 'app/services/dashboard.service';
+import { saveAs } from "file-saver";
 
 @Component({
   selector: 'app-profile',
@@ -18,18 +19,29 @@ export class TypographyComponent implements OnInit {
   constructor(private dashboardService: DashboardService, private route: ActivatedRoute) { }
 
   params: string;
-  studentInfo: any ;
+  studentInfo: any;
   ngOnInit() {
     this.params = this.route.snapshot.paramMap.get('id');
     console.log(this.params);
     this.getStudentInfo();
   }
 
-  getStudentInfo(){
-    this.dashboardService.getStudentProfile(this.params).subscribe((res)=>{
+  getStudentInfo() {
+    this.dashboardService.getStudentProfile(this.params).subscribe((res) => {
       this.studentInfo = JSON.parse(JSON.stringify(res));
       console.log(this.studentInfo);
     })
+  }
+
+  downloadPdf() {
+    this.dashboardService.getProfilePdf(this.params).subscribe((res) => {
+      saveAs(res, `${this.params}-Resume`);
+      console.log("Resume downloaded", res);
+    }, err => {
+      alert('Problem while downloading file');
+      console.log(err);
+    }
+    )
   }
 
 

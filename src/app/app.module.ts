@@ -10,6 +10,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { MatTableModule } from '@angular/material/table';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   imports: [
@@ -21,6 +23,8 @@ import { SignupComponent } from './signup/signup.component';
     RouterModule,
     AppRoutingModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatChipsModule
   ],
   declarations: [
     AppComponent,

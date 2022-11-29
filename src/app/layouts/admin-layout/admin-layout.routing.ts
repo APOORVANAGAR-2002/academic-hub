@@ -8,6 +8,8 @@ import { IconsComponent } from '../../icons/icons.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { TeacherListComponent } from 'app/teacher-list/teacher-list.component';
 import { TeacherComponent } from 'app/teacher/teacher.component';
+import { SignupComponent } from 'app/signup/signup.component';
+import { LoginComponent } from 'app/login/login.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -52,8 +54,8 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    { path: 'dashboard', component: DashboardComponent },
+    { path: '', redirectTo: 'dashboard/:email', pathMatch: 'full' },
+    { path: 'dashboard/:email', component: DashboardComponent },
     { path: 'student/addStudent', component: UserProfileComponent },
     { path: 'student/editStudent/:id', component: UserProfileComponent },
     { path: 'student/allStudents', component: TableListComponent },

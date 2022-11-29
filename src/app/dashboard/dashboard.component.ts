@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DashboardService } from 'app/services/dashboard.service';
 import * as Chartist from 'chartist';
 
@@ -15,7 +16,7 @@ export class DashboardComponent implements OnInit {
   totalDepartments: number;
   totalCourses: number;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService, private route: ActivatedRoute) { }
   data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
@@ -84,6 +85,7 @@ export class DashboardComponent implements OnInit {
     seq2 = 0;
   };
 
+  email: string;
   ngOnInit() {
 
     this.getNewAddmission();
@@ -91,6 +93,7 @@ export class DashboardComponent implements OnInit {
     this.getTeachersCount();
     this.getDepartmentsCount();
     this.getCoursesCount();
+    this.email = this.route.snapshot.paramMap.get('email');
 
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
     const dataDailySalesChart: any = {
@@ -127,7 +130,7 @@ export class DashboardComponent implements OnInit {
         tension: 0
       }),
       low: 0,
-      high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+      high: 10, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
       chartPadding: { top: 0, right: 0, bottom: 0, left: 0 }
     }
     var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
@@ -139,10 +142,9 @@ export class DashboardComponent implements OnInit {
 
     /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
     var datawebsiteViewsChart = {
-      labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+      labels: ['CSE', 'Mechanical', 'Electrical', 'Nuclear', 'Bio-tech'],
       series: [
-        [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
-
+        [8, 5, 7, 3, 1]
       ]
     };
     var optionswebsiteViewsChart = {
@@ -150,7 +152,7 @@ export class DashboardComponent implements OnInit {
         showGrid: false
       },
       low: 0,
-      high: 1000,
+      high: 10,
       chartPadding: { top: 0, right: 5, bottom: 0, left: 0 }
     };
     var responsiveOptions: any[] = [
@@ -171,31 +173,32 @@ export class DashboardComponent implements OnInit {
   getNewAddmission() {
     this.dashboardService.getNewAdmission().subscribe((res) => {
       this.studentList = JSON.parse(JSON.stringify(res));
+      this.studentList = this.studentList.slice(0,10);
     })
   }
-  getStudentCount(){
-    this.dashboardService.getNewAdmission().subscribe((res)=>{
+  getStudentCount() {
+    this.dashboardService.getNewAdmission().subscribe((res) => {
       var students = JSON.parse(JSON.stringify(res));
       this.totalStudents = students.length;
       console.log(this.totalStudents);
     })
   }
-  getTeachersCount(){
-    this.dashboardService.getAllTeachers().subscribe((res)=>{
+  getTeachersCount() {
+    this.dashboardService.getAllTeachers().subscribe((res) => {
       var teachers = JSON.parse(JSON.stringify(res));
       this.totalTeacher = teachers.length;
       console.log(this.totalTeacher);
     })
   }
-  getDepartmentsCount(){
-    this.dashboardService.getTotalDepartments().subscribe((res)=>{
+  getDepartmentsCount() {
+    this.dashboardService.getTotalDepartments(this.email).subscribe((res) => {
       var department = JSON.parse(JSON.stringify(res));
       this.totalDepartments = department.length;
       console.log(this.totalDepartments);
     })
   }
-  getCoursesCount(){
-    this.dashboardService.getTotalCourses().subscribe((res)=>{
+  getCoursesCount() {
+    this.dashboardService.getTotalCourses(this.email).subscribe((res) => {
       var course = JSON.parse(JSON.stringify(res));
       this.totalCourses = course.length;
       console.log(this.totalCourses);

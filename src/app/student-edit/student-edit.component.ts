@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute } from '@angular/router';
 import { DashboardService } from 'app/services/dashboard.service';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-student-edit',
@@ -18,6 +19,7 @@ export class StudentEditComponent {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   Skills: string[] = [];
+  isAddMode: boolean;
 
   constructor(private dashboardService: DashboardService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.createForm();
@@ -103,23 +105,27 @@ export class StudentEditComponent {
   studentInfo: any;
 
   ngOnInit() {
+    this.createForm();
     this.params = this.route.snapshot.paramMap.get('id');
     console.log(this.params);
     this.getStudentInfo();
-
   }
 
   getStudentInfo() {
-    this.dashboardService.getStudentProfile(this.params).subscribe((res) => {
-      this.studentInfo = JSON.parse(JSON.stringify(res));
-      console.log(this.studentInfo);
-
-      if (this.studentInfo) {
-        this.userForm.get('firstName').setValue(this.studentInfo.firstName);
-        console.log(this.userForm);
-
-      }
+    this.dashboardService.getStudentProfile(this.params).subscribe(res => {
+      console.log(res);
+      this.userForm = JSON.parse(JSON.stringify(res))
+      console.log(this.userForm);
     })
+    // this.dashboardService.getStudentProfile(this.params).subscribe((res) => {
+    //   this.studentInfo = JSON.parse(JSON.stringify(res));
+    //   console.log(this.studentInfo);
+
+    //   if (this.studentInfo) {
+    //     this.userForm.get('firstName').setValue(this.studentInfo.firstName);
+    //     console.log(this.userForm);
+    //   }
+    // })
   }
 
 

@@ -51,8 +51,9 @@ export class TeacherComponent {
   submitForm() {
     const value = this.userForm.value;
     console.log(value);
-    this.dashboardService.addStudentInfo(value).subscribe((res) => {
+    this.dashboardService.addTeacherInfo(value).subscribe((res) => {
       console.log("Teacher added response:", res);
+      alert('Teacher added successfully');
     })
   }
 

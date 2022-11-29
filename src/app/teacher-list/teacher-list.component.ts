@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DashboardService } from 'app/services/dashboard.service';
 
 export interface TeacherData {
+  teacherId: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -19,10 +20,10 @@ export interface TeacherData {
 })
 export class TeacherListComponent {
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'department', 'subject'];
+  displayedColumns: string[] = ['teacherId', 'firstName', 'lastName', 'email', 'department', 'subject'];
   dataSource: MatTableDataSource<any> = undefined;
 
-  teachers: any[] = [];
+  teachers: any[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -30,18 +31,16 @@ export class TeacherListComponent {
   }
 
   ngOnInit() {
-    this.dashboardService.getNewAdmission().subscribe((res)=>{
+    this.dashboardService.getAllTeachers().subscribe((res) => {
       console.log("response teacher list", res);
       this.teachers = JSON.parse(JSON.stringify(res));
+      this.dataSource = new MatTableDataSource(JSON.parse(JSON.stringify(res)));
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
-    console.log(this.teachers);
-    this.dataSource = new MatTableDataSource(this.teachers);
-
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
