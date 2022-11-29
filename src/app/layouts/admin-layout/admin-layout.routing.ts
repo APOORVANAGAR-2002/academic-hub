@@ -54,8 +54,8 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: '', redirectTo: 'dashboard/:email', pathMatch: 'full' },
-    { path: 'dashboard/:email', component: DashboardComponent },
+    { path: '', redirectTo: 'dashboard/mody@gmail.com', pathMatch: 'full' },
+    { path: 'dashboard/mody@gmail.com', component: DashboardComponent },
     { path: 'student/addStudent', component: UserProfileComponent },
     { path: 'student/editStudent/:id', component: UserProfileComponent },
     { path: 'student/allStudents', component: TableListComponent },
