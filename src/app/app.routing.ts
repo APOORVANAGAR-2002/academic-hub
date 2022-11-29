@@ -13,9 +13,6 @@ const routes: Routes = [
     redirectTo: 'dashboard/mody@gmail.com',
     pathMatch: 'full',
   },
-  { path: 'signup', component: SignupComponent },
-  { path: 'signin', component: LoginComponent },
-
   {
     path: '',
     component: AdminLayoutComponent,
